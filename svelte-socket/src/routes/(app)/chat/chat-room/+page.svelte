@@ -18,7 +18,6 @@
 	{
 		messages = [...messages, data.message];
 	};
-
 	io_chat.on('room-list', ( data : string ) => {
 		console.log(io_chat.id);
 		console.log(data);
