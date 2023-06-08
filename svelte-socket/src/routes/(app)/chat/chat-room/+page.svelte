@@ -21,7 +21,7 @@
 	io_chat.on('room-list', ( data : string ) => {
 		console.log(io_chat.id);
 		console.log(data);
-	});
+	}); 
 
     io_chat.on('message', ( data : testDto ) => {
         console.log("join_some : => ", data);
