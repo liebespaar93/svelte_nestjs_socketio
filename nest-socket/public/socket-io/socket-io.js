@@ -20,6 +20,13 @@ const handleSendMSG = () => {
 	socket_chat.emit('message', { message: message.value, test: "test" })
 };
 
+const handleRoomlist = () => {
+	console.log("handle room");
+	socket_chat.emit('room-list');
+};
+socket_chat.on('room-list', ( data ) => {
+  console.log(data);
+});
 socket_chat.on('message', ( data ) => {
   console.log(data);
   handleNewMessage(data);

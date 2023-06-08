@@ -1,22 +1,19 @@
-
 <script lang="ts">
-	import ioClient from 'socket.io-client';
-	
-
-	const ENDPOINT = 'http://localhost:3000/chat';
-
-	const socket = ioClient(ENDPOINT);
+	import { io_game } from '$lib/webSocketConnection_game';
 
 	let message: string = '';
 	let messages: string[] = [];
 
-	export const io = socket;
-
+	function handle_room_list()
+	{
+		console.log("handle_room_list: ", "game");
+		io_game.emit('room-list');
+	}
 	
 	function handleSendMSG ()
 	{
 		console.log(message);
-		io.emit('message', { message: message, test: "test" });
+		io_game.emit('message', { message: message, test: "test" });
 	};
   
 	function handleNewMessage ( data : testDto )
@@ -24,14 +21,14 @@
 		messages = [...messages, data.message];
 	};
 
-    socket.on('message', ( data : testDto ) => {
+    io_game.on('message', ( data : testDto ) => {
         console.log("join_some : => ", data);
 		handleNewMessage(data);
     })
-    
 </script>
 
 
+<button on:click={ handle_room_list } > reset </button>
 <div>
 	<ul>
 		{#if messages }
