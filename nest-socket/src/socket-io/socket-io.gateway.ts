@@ -10,9 +10,9 @@ export class SocketIoGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 
   afterInit(server: Server) {
     console.count('Init');
-	this.server.server.engine.opts.pingTimeout = 500;
-	this.server.server.engine.opts.pingInterval = 500;
-	this.server.server.engine.opts.upgradeTimeout = 1000;
+	this.server.server.engine.opts.pingTimeout = 20000;
+	this.server.server.engine.opts.pingInterval = 20000;
+	this.server.server.engine.opts.upgradeTimeout = 20000;
   }
 
   handleDisconnect(client: Socket) {
@@ -55,18 +55,13 @@ export class SocketIoGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 	console.log()
 	this.server.adapter.rooms.forEach((val, key, map) => {
 		console.log(key, " ", val);
-		roomlist.join(key);
+		roomlist.push(key);
 	});
 	// console.log("server =>> sw : " , this.server);
-	console.log("\n");
-	// client.emit("room-list", roomlist );
+	console.log("roomlist \n",roomlist);
+	console.log("roomlist \n",);
+	client.emit('room-list',roomlist);
   }
-//   @SubscribeMessage('room-reset')
-//   ft_room_reset(client: Socket, payload: SocketIoDto)
-//   {
-
-// 	console.log(payload);
-//   }
   
 
 }

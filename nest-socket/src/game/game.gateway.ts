@@ -12,9 +12,9 @@ export class GameGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
   afterInit(server: Server) {
     console.count('Init');
-	this.server.server.engine.opts.pingTimeout = 500;
-	this.server.server.engine.opts.pingInterval = 500;
-	this.server.server.engine.opts.upgradeTimeout = 1000;
+	this.server.server.engine.opts.pingTimeout = 20000;
+	this.server.server.engine.opts.pingInterval = 20000;
+	this.server.server.engine.opts.upgradeTimeout = 20000;
   }
 
   handleDisconnect(client: Socket) {
