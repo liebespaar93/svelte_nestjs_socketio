@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { io_game } from '$lib/webSocketConnection_game';
 
 	let message: string = '';
@@ -8,7 +9,7 @@
 	{
 		console.log("handle_room_list: ", "game");
 		io_game.emit('room-list');
-	}
+	};
 	
 	function handleSendMSG ()
 	{
@@ -24,7 +25,14 @@
     io_game.on('message', ( data : testDto ) => {
         console.log("join_some : => ", data);
 		handleNewMessage(data);
-    })
+    });
+
+	function chat_goto( event : any )
+	{
+		console.log(event.target.innerText);
+		goto('chat/');
+	}
+
 </script>
 
 
@@ -37,6 +45,9 @@
 		{/each}
 		{/if }
 	</ul>
+</div>
+<div>
+	<button on:click={ chat_goto }>goto chat</button>
 </div>
 <div>
 	<input type="text" bind:value={message} />

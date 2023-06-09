@@ -1,5 +1,6 @@
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { io_chat } from "$lib/webSocketConnection_chat";
 
 	let message: string = '';
@@ -28,17 +29,25 @@
 		handleNewMessage(data);
     })
     
+	function game_goto( event : any )
+	{
+		console.log(event.target.innerText);
+		goto('/game/');
+	}
 </script>
 
 <div>
+	<div></div>
 	<ul>
 		{#if messages }
 		{#each messages as msg}
-			<li> {msg}</li>
+			<li> {msg} </li>
 		{/each}
 		{/if }
 	</ul>
-
+</div>
+<div>
+	<button on:click={ game_goto }>goto game</button>
 </div>
 <div>
 	<input type="text" bind:value={message} />
